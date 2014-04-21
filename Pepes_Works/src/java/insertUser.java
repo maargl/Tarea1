@@ -27,10 +27,12 @@ public class insertUser extends HttpServlet {
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("index/xhtml;charset=UTF-8");
+        //response.setContentType("index/xhtml;charset=UTF-8");
         //aqui hay que comparar con la base de datos
         String nombre=request.getParameter("Usuario");
         String clave=request.getParameter("Contrasenna");
+        /*conexion conec= new conexion();
+        conec.getConnection();*/
         String text1= new String("18408267");
         String text2= new String("1234567");
         
@@ -40,7 +42,16 @@ public class insertUser extends HttpServlet {
         }
         else
         {
-            response.sendRedirect("index.xhtml");
+           try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Error!!</title>");
+            out.println("<body>");
+            out.println("<h1> Usuario y/o contraseña no validos!! </h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
         }
     }
         
