@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-
+import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -33,13 +32,34 @@ public class insertUser extends HttpServlet {
         String clave=request.getParameter("Contrasenna");
         /*conexion conec= new conexion();
         conec.getConnection();*/
-        String text1= new String("18408267");
-        String text2= new String("1234567");
+        //String text1= new String("18408267");
+        //String text2= new String("1234567");
         
-        if ( (nombre.compareTo(text1) + clave.compareTo(text2)==0))         
+        OracleBD baseDatos = new OracleBD().conectar();
+        
+        ResultSet resultados = baseDatos.consultar("SELECT rut, contrasenna,tipo FROM usuario");
+        
+        if (resultados != null) {
+            try {
+                while (resultados.next()) {
+                    if(nombre.equals(resultados.getString("RUT")) && clave.equals(resultados.getString("CONTRASENNA")) && "administrador".equals(resultados.getString("TIPO"))){
+                        response.sendRedirect("admin.xhtml");
+                        break;
+                    }
+                    else if(nombre.equals(resultados.getString("RUT")) && clave.equals(resultados.getString("CONTRASENNA")) && "vendedor".equals(resultados.getString("TIPO"))){
+                        //response.sendRedirect("admin.xhtml");
+                        break;
+                    }
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        /*if ( (nombre.compareTo(text1) + clave.compareTo(text2)==0))         
         {
             response.sendRedirect("admin.xhtml");
-        }
+        }*/
         else
         {
            try (PrintWriter out = response.getWriter()) {

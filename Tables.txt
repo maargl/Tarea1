@@ -1,0 +1,60 @@
+CREATE TABLE usuario(
+	rut varchar2(20) not null primary key,
+	contrasenna varchar2(20) not null,
+	nombre varchar2(20) not null,
+	tipo varchar2(20) not null,
+	comision integer not null);
+
+
+CREATE TABLE cliente(
+	rut varchar2(20) not null primary key,
+	nombre varchar2(20) not null);
+
+
+CREATE TABLE producto(
+	id_producto integer not null primary key,
+	stock integer not null,
+	descripcion varchar2(20) not null,
+	categoria varchar2(20) not null,
+	precio integer not null);
+
+
+CREATE TABLE compra(
+	id_producto integer not null primary key,
+	monto_total integer not null,
+	fecha date,
+	hora date);
+
+
+CREATE TABLE venta(
+	id_venta integer not null primary key,
+	id_cliente integer not null foreign key,
+	id_usuario integer not null foreign key,
+	monto_total integer not null,
+	fecha date,
+	hora date);
+
+
+CREATE TABLE detalle_venta(
+	id_detalle integer not null primary key,
+	id_venta integer not null foreign key,
+	id_producto integer not null foreign key,
+	cantidad integer not null);
+
+
+CREATE TABLE detalle_compra(
+	id_detalle integer not null primary key,
+	id_compra integer not null foreign key,
+	id_producto integer not null foreign key,
+	cantidad integer not null,
+	precio integer not null);
+
+
+//no funcionaaaaaaaaaaaa
+CREATE TRIGGER venta_after_insert
+AFTER INSERT
+	ON venta
+BEGIN
+	:new.fecha := SYSDATE;
+	:new.hora := TO_CHAR(SYSDATE, 'HH24:mi:SS');
+END;
