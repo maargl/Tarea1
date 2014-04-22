@@ -1,5 +1,7 @@
+package packages2;
 
-import packages2.*;
+
+
 import java.sql.*;
 
 public class OracleBD {

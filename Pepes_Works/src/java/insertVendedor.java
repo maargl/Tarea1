@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 
+import packages2.OracleBD;
+import java.sql.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -36,26 +38,43 @@ public class insertVendedor extends HttpServlet {
         String clave2 = request.getParameter("Contrasenna2");
         String nombre = request.getParameter("Nombre");
         
-        if (clave1.equals(clave2)){
-            Vendedor nuevo= new Vendedor(rut, clave1,nombre);
-        }
-        else{
-            response.sendRedirect("ingresar_vendedor.xhtml");
-        }
+        OracleBD baseDatos = new OracleBD().conectar();
         
-        
-        /*try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            /*out.println("<!DOCTYPE html>");
+        if (!clave1.equals(clave2)){
+            PrintWriter out = response.getWriter();
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet insertVendedor</title>");            
+            out.println("<title>Error</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet insertVendedor at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Las claves son distintas!</h1>");
             out.println("</body>");
             out.println("</html>");
-        }*/
+        }
+        
+        else if (baseDatos.ejecutar("INSERT INTO USUARIO(RUT,CONTRASENNA,NOMBRE,TIPO,COMISION) VALUES('" + rut + "', '" + clave1 +"','"+ nombre +"', 'vendedor', 0)")){
+           PrintWriter out = response.getWriter();
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Exito</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Insertado!</h1><br></br>");
+            out.println("<a  href= http://localhost:8080/Pepes_Works/admin.xhtml >Volver</a>");
+            out.println("</body>");
+            out.println("</html>");
+        } else {
+           PrintWriter out = response.getWriter();
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Error</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>No insertado!</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

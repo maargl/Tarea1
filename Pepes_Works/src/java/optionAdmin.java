@@ -42,27 +42,7 @@ public class optionAdmin extends HttpServlet {
         }
         
         else if (opcion.equals("administrar_productos")){
-            //response.sendRedirect("administrar_productos.xhtml");
-            PrintWriter out = response.getWriter();
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>adminProductos</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<table border='3' width='600px' align='center' bgcolor='#F8F8FF'><tr><th>");
-            out.println("<form action=\"adminProductos\" method=\"get\"><br></br>");
-            out.println("<textarea name=\"productos\" rows=\"20\" cols=\"50\">");
-            out.println("TEXTO CON VISTA DE PRODUCTOS\t...");
-            out.println("</textarea><br></br>");
-            out.println("<center>");
-            out.println("Buscar: <input type=\"text\" name=\"Busqueda\"></input><br></br><br></br>");
-            out.println("<input type=\"submit\" value=\"Enviar\"></input>   <input type=\"submit\" value=\"Editar\"></input> ");
-            out.println("<c/enter>");
-            out.println("</form>");
-            out.println("</th></tr></table>");
-            out.println("</body>");
-            out.println("</html>");            
-            
+            response.sendRedirect("administrar_productos.jsp");
         }
         else if (opcion.equals("ingresar_compra")){
             response.sendRedirect("ingresar_compra.xhtml");
