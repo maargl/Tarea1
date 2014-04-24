@@ -20,19 +20,18 @@
             <tr>
                 <th>
                     <h2><b>Administrar Productos</b><br></br></h2>
-                    <form action="insertProducto" method="post">
-                        
-                        <textarea value="Productos" rows="20" cols="50"><%
+                    <form action="editar_productos.jsp" method="post">
+                        <textarea name="productos" rows="20" cols="50" disabled><%
                 OracleBD baseDatos = new OracleBD().conectar();
 		
                 ResultSet resultados = baseDatos.consultar("SELECT ID_PRODUCTO,STOCK,DESCRIPCION  FROM PRODUCTO");
                 
 		if (resultados != null) {
                     try {
-                        out.println("ID\tDESCRIPCION\tSTOCK");  
+                        out.println("ID \t DESCRIPCION \t\tSTOCK");  
                 
                          while (resultados.next()) {
-                              out.println(resultados.getString("ID_PRODUCTO")+"\t "+resultados.getString("DESCRIPCION")+"\t "+ resultados.getString("STOCK"));
+                              out.println(resultados.getString("ID_PRODUCTO")+"\t "+resultados.getString("DESCRIPCION")+"\t -"+ resultados.getString("STOCK")+"-");
                                 
                         }
                     }
@@ -44,11 +43,13 @@
                     out.println("Error en coneccion");
                 }
 	%>
+                       </textarea>
 
-
-                         </textarea><br></br> 
-                        Buscar: <input type="text" name="Busqueda"></input><br></br><br></br>    
-                        <input type="submit" value="Editar Producto"></input> 
+                         <br></br> 
+                       Ingrese ID: <input type="text" name="Busqueda"></input>   
+                        <input type="submit" value="Editar Producto"></input><br></br>
+                   </form >
+                    <form action="agregar_producto.xhtml" method="post">
                         <input type="submit" value="Agregar Producto"></input><br></br><br></br>
                         
                     </form>
