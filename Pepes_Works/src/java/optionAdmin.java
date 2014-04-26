@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+import java.sql.*;
+import java.util.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -45,7 +49,9 @@ public class optionAdmin extends HttpServlet {
             response.sendRedirect("administrar_productos.jsp");
         }
         else if (opcion.equals("ingresar_compra")){
-            response.sendRedirect("ingresar_compra.xhtml");
+           
+            response.sendRedirect("ingresar_compra.xhtml");           
+            
         }
         
         else{

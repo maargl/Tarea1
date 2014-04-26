@@ -44,10 +44,12 @@ CREATE TABLE detalle_venta(
 
 CREATE TABLE detalle_compra(
 	id_detalle integer not null primary key,
-	id_compra integer not null foreign key,
-	id_producto integer not null foreign key,
+	id_compra integer not null,
+	id_producto integer not null,
 	cantidad integer not null,
-	precio integer not null);
+	precio integer not null,
+        foreign key (id_compra) references COMPRA(ID_COMPRA),
+        foreign key (id_producto) references PRODUCTO(id_producto));
 
 
 //no funcionaaaaaaaaaaaa
