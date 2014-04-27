@@ -5,7 +5,6 @@
 --%>
 
 <%@page import="packages2.OracleBD"%>
-
 <%@page import="java.sql.*" %>
 <%@page import="java.sql.ResultSet"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
