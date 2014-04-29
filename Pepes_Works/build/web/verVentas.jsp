@@ -17,13 +17,32 @@
     <body>
         <table border='3' width='600px' align='center' bgcolor='#F8F8FF'>
             <tr>
-                <th>
-                    <h2><b>Administrar Productos</b><br></br></h2>
+                <th><%
+                OracleBD baseDatos = new OracleBD().conectar();
+                
+                ResultSet resultados = baseDatos.consultar("select nombre from cliente WHERE RUT='"+
+                        request.getParameter("Opcion")+"'");
+                
+		if (resultados != null) {
+                    try {
+                        while (resultados.next()) {
+                              out.println("<h2><b>Ventas: "+resultados.getString("NOMBRE")+"</b><br></br></h2>");                                
+                        }
+                    }
+                    catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else{
+                    out.println("Error en coneccion");
+                }
+                
+                %>
                     <form action="editar_productos.jsp" method="post">
                         <textarea name="productos" rows="20" cols="50" disabled><%
-                OracleBD baseDatos = new OracleBD().conectar();
+                //OracleBD baseDatos = new OracleBD().conectar();
 		
-                ResultSet resultados = baseDatos.consultar("select * from VIEW_VENTASCLIENTE WHERE RUT='"+
+                resultados = baseDatos.consultar("select * from VIEW_VENTASCLIENTE WHERE RUT='"+
                         request.getParameter("Opcion")+"'");
                 
 		if (resultados != null) {
@@ -43,12 +62,8 @@
                 }
 	%>
                        </textarea>
-
-                         <br></br> 
-                       
-                   </form >
-                    
-                  
+                         <br></br>                       
+                   </form >         
                 </th>  
             </tr>
          </table>
