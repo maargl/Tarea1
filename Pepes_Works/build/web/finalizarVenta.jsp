@@ -103,7 +103,13 @@
                 <br></br><br></br>                
             </tr>
         </table>
-        <a href="admin.jsp">Volver</a><br></br>
+        <%
+          if ("administrador".equals(session.getAttribute("tipo"))){
+              out.println("<h4><a href=\"admin.jsp\">Volver</a><br></br></h4>");
+          }else{
+             out.println("<h4><a href=\"vendedor.jsp\">Volver</a><br></br></h4>"); 
+          }      
+    %>
         </center>   
     </body>
 </html>

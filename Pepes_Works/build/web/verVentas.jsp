@@ -1,6 +1,6 @@
 <%-- 
-    Document   : administrar_productos
-    Created on : 21-04-2014, 11:10:17 PM
+    Document   : verVentas
+    Created on : 29-04-2014, 02:49:32 PM
     Author     : Jeremy
 --%>
 
@@ -12,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Administrar</title>
+        <title>Ventas</title>
     </head>
     <body>
         <table border='3' width='600px' align='center' bgcolor='#F8F8FF'>
@@ -23,15 +23,15 @@
                         <textarea name="productos" rows="20" cols="50" disabled><%
                 OracleBD baseDatos = new OracleBD().conectar();
 		
-                ResultSet resultados = baseDatos.consultar("SELECT ID_PRODUCTO,STOCK,DESCRIPCION  FROM PRODUCTO");
+                ResultSet resultados = baseDatos.consultar("select * from VIEW_VENTASCLIENTE WHERE RUT='"+
+                        request.getParameter("Opcion")+"'");
                 
 		if (resultados != null) {
                     try {
-                        out.println("ID \t DESCRIPCION \t\tSTOCK");  
+                        out.println("PRODUCTO:");  
                 
                          while (resultados.next()) {
-                              out.println(resultados.getString("ID_PRODUCTO")+"\t "+resultados.getString("DESCRIPCION")+"\t -"+ resultados.getString("STOCK")+"-");
-                                
+                              out.println("-"+resultados.getString("DESCRIPCION"));                                
                         }
                     }
                     catch (Exception e) {
@@ -45,13 +45,9 @@
                        </textarea>
 
                          <br></br> 
-                       Ingrese ID: <input type="text" name="Busqueda"></input>   
-                        <input type="submit" value="Editar Producto"></input><br></br>
+                       
                    </form >
-                    <form action="agregar_producto.xhtml" method="post">
-                        <input type="submit" value="Agregar Producto"></input><br></br><br></br>
-                        
-                    </form>
+                    
                   
                 </th>  
             </tr>

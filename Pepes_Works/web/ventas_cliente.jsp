@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ingresar_venta
-    Created on : 26-04-2014, 10:56:36 PM
+    Document   : ventas_cliente
+    Created on : 29-04-2014, 02:30:39 PM
     Author     : Jeremy
 --%>
 
@@ -12,16 +12,16 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nueva venta</title>
+        <title>Ventas cliente</title>
     </head>
     <body>
         <table border='3' width='600px' align='center' bgcolor='#F8F8FF'>
             <tr>
                 <th>
-                    <h2><b>Venta</b><br></br></h2>
-                    <form action="insertVenta.jsp" method="post">
+                    <h2><b>Ventas Cliente</b><br></br></h2>
+                    <form action="verVentas.jsp" method="post">
                         Cliente: <select name="Opcion"><%
-                OracleBD baseDatos = new OracleBD().conectar();
+                 OracleBD baseDatos = new OracleBD().conectar();
 		
                 ResultSet resultados = baseDatos.consultar("SELECT RUT,NOMBRE  FROM CLIENTE");
                 
@@ -40,11 +40,12 @@
                 else{
                     out.println("Error en coneccion");
                 }
+                
 	%>
-                       </select>
-                       <input type="submit" value="Insertar Producto"></input><br></br>
+                        </select>
+                        <input type="submit" value="Ver"></input><br></br>
                    </form >
-                    
+                                     
                 </th>  
             </tr>
          </table>

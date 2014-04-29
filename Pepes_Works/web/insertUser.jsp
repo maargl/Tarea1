@@ -32,11 +32,13 @@
             try {
                 while (resultados.next()) {
                     if(nombre.equals(resultados.getString("RUT")) && clave.equals(resultados.getString("CONTRASENNA")) && "administrador".equals(resultados.getString("TIPO"))){
+                        session.setAttribute("tipo", "administrador");
                         response.sendRedirect("admin.jsp");
                         break;
                     }
                     else if(nombre.equals(resultados.getString("RUT")) && clave.equals(resultados.getString("CONTRASENNA")) && "vendedor".equals(resultados.getString("TIPO"))){
                         response.sendRedirect("vendedor.jsp");
+                        session.setAttribute("tipo", "vendedor");
                         break;
                     }
                 }
