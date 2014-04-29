@@ -9,7 +9,7 @@ public class OracleBD {
     public OracleBD conectar() {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
-            String BaseDeDatos = "jdbc:oracle:thin:@localhost:1521:database";
+            String BaseDeDatos = "jdbc:oracle:thin:@172.16.190.130:1522:database";
 
             conexion = DriverManager.getConnection(BaseDeDatos, "SYSTEM", "database");
             if (conexion != null) {

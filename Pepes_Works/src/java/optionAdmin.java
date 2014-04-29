@@ -61,6 +61,9 @@ public class optionAdmin extends HttpServlet {
         else if (opcion.equals("ver_ventas")){           
             response.sendRedirect("ventas_cliente.jsp");    
         }
+        else if (opcion.equals("mis_ventas")){           
+            response.sendRedirect("mis_ventas.jsp");    
+        }
         
         else{
             try (PrintWriter out = response.getWriter()) {
